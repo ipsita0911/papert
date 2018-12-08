@@ -136,6 +136,17 @@ Turtle.prototype.color_ = function (args) {
     this.c.strokeStyle = "rgb("+parseInt(args[0])+","+parseInt(args[1])+","+parseInt(args[2])+")";
 }
 
+Turtle.prototype.linebet = function(x1, y1, x2, y2) {
+    this.savestate();
+    if (this.pen) {
+        this.c.beginPath();
+        this.c.moveTo(x1, y1);
+        this.c.lineTo(x2, y2);
+        this.c.stroke();
+    }
+}
+
+
 Turtle.prototype.arc = function (radius, angle) {
     console.log("Hello");
     this.savestate();
@@ -165,6 +176,7 @@ Turtle.prototype.arc_point = function (radius, angle) {
        
   }
 }
+
 
 
 Turtle.prototype.arc_pointc = function (center_x, center_y, radius, angle) {
@@ -433,6 +445,11 @@ DelayTurtle.prototype.circlec = function(center_x, center_y, radius) {
         
     }
 };
+
+DelayTurtle.prototype.linebet = function(x1, y1, x2, y2) {
+    this.addCommand(this.turtle.linebet, [x1, y1, x2, y2])
+}
+
 
 DelayTurtle.prototype.setxy = function() { this.addCommand(this.turtle.setxy,arguments)};
 DelayTurtle.prototype.setx = function() { this.addCommand(this.turtle.setx,arguments)};
