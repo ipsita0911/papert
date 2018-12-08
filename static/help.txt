@@ -43,6 +43,7 @@ CLEAR
 CS
 
 CIRCLE r        Draw a Circle of radius r around the turtle
+CIRCLEC x y r   Draw a Circle of radius r around the given co-ordinates 
 
 ARC r d         Draw an arc of radius r for d degrees
 

@@ -158,11 +158,31 @@ Logo.prototype.setup = function () {
         this.turtle.arc(a[0],a[1]);
     });
     
+
+    this.addCommand('arcc',4,null, function (a) { 
+        if (parseFloat(a[0]) != a[0]) return new Token('error','When using arcc, you can only set the centreX to a number, not '+a[0])
+        if (parseFloat(a[1]) != a[1]) return new Token('error','When using arcc, you can only set the centreY to a number, not '+a[1])
+        if (parseFloat(a[2]) != a[2]) return new Token('error','When using arcc, you can only set the radius to a number, not '+a[2])
+        if (parseFloat(a[3]) != a[3]) return new Token('error','When using arcc, you can only set the angle to a number, not '+a[3])
+  
+        this.turtle.arcc(a[0], a[1], a[2], a[3]);
+    });
+
+
     this.addCommand('circle',1,null, function (a) { 
+        console.log(a);
         if (parseFloat(a[0]) != a[0]) return new Token('error','When using circle, you can only set the radius to a number, not '+a[0])
 
         this.turtle.circle(a[0]);
     });
+
+    this.addCommand('circlec',3,null, function (a) {
+        console.log(a); 
+        if (parseFloat(a[2]) != a[2]) return new Token('error','When using circlec, you can only set the co-ordinates and radius to a number, not '+a[2])
+
+        this.turtle.circlec(a[0], a[1], a[2]);
+    });
+
     
     this.addTurtleCommand('penup',0,['pu']);
     this.addTurtleCommand('pendown',0,['pd']);
@@ -462,6 +482,7 @@ Logo.prototype.setup = function () {
 
 
 Logo.prototype.run = function (code) {
+    console.log(code);
     var js = new Array();
    
     this.t.load(code);

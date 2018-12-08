@@ -144,10 +144,20 @@ Turtle.prototype.arc = function (radius, angle) {
        
   }
 }
+
 Turtle.prototype.arc_point = function (radius, angle) {
     if (this.pen) {
         this.c.beginPath();
         this.c.arc(this.x,this.y, radius, ((this.angle+angle)%360)/180*Math.PI, ((this.angle+angle+1)%360)/180*Math.PI,false);
+        this.c.stroke();
+       
+  }
+}
+
+Turtle.prototype.arc_pointc = function (center_x, center_y, radius, angle) {
+    if (this.pen) {
+        this.c.beginPath();
+        this.c.arc(center_x,center_y, radius, ((this.angle+angle)%360)/180*Math.PI, ((this.angle+angle+1)%360)/180*Math.PI,false);
         this.c.stroke();
        
   }
@@ -160,6 +170,18 @@ Turtle.prototype.circle = function (radius) {
     if (this.pen) {
         this.c.beginPath();
         this.c.arc(this.x,this.y, radius, 0, 2*Math.PI,false);
+        this.c.stroke();
+       
+  }
+}
+
+Turtle.prototype.circlec = function (center_x, center_y, radius) {
+    this.savestate();
+    console.log(center_x+","+center_y);
+    console.log(radius);
+    if (this.pen) {
+        this.c.beginPath();
+        this.c.arc(center_x,center_y, radius, 0, 2*Math.PI,false);
         this.c.stroke();
        
   }
@@ -362,14 +384,30 @@ DelayTurtle.prototype.arc = function(radius, angle) {
         this.addCommand(this.turtle.arc,[radius,angle])
     }
 };
+
 DelayTurtle.prototype.circle = function(radius) {
     if (this.drawbits) {
         this.savestate();
         for (var c = 0; c < 360; c++ ) {
             this.addCommand(this.turtle.arc_point,[radius,c])
+
         }
     } else {
         this.addCommand(this.turtle.circle,[radius])
+        
+    }
+};
+
+DelayTurtle.prototype.circlec = function(center_x, center_y, radius) {
+    if (this.drawbits) {
+        this.savestate();
+        for (var c = 0; c < 360; c++ ) {
+            this.addCommand(this.turtle.arc_pointc,[center_x, center_y, radius,c])
+
+        }
+    } else {
+        this.addCommand(this.turtle.circlec,[center_x, center_y, radius])
+        
     }
 };
 
