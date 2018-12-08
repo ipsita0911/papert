@@ -131,15 +131,27 @@ Turtle.prototype.color = function (args) {
     this.savestate();
     this.color_(args)
 }
+
 Turtle.prototype.color_ = function (args) {
     this.c.strokeStyle = "rgb("+parseInt(args[0])+","+parseInt(args[1])+","+parseInt(args[2])+")";
 }
 
 Turtle.prototype.arc = function (radius, angle) {
+    console.log("Hello");
     this.savestate();
     if (this.pen) {
         this.c.beginPath();
         this.c.arc(this.x,this.y, radius, this.radians(), ((this.angle+angle)%360)/180*Math.PI,false);
+        this.c.stroke();
+       
+  }
+}
+
+Turtle.prototype.arcc = function (center_x, center_y, radius, angle) {
+    this.savestate();
+    if (this.pen) {
+        this.c.beginPath();
+        this.c.arc(center_x, center_y, radius, this.radians(), ((this.angle+angle)%360)/180*Math.PI,false);
         this.c.stroke();
        
   }
@@ -154,6 +166,7 @@ Turtle.prototype.arc_point = function (radius, angle) {
   }
 }
 
+
 Turtle.prototype.arc_pointc = function (center_x, center_y, radius, angle) {
     if (this.pen) {
         this.c.beginPath();
@@ -162,8 +175,6 @@ Turtle.prototype.arc_pointc = function (center_x, center_y, radius, angle) {
        
   }
 }
-
-
 
 Turtle.prototype.circle = function (radius) {
     this.savestate();
@@ -382,6 +393,18 @@ DelayTurtle.prototype.arc = function(radius, angle) {
         }
     } else {
         this.addCommand(this.turtle.arc,[radius,angle])
+    }
+};
+
+DelayTurtle.prototype.arcc = function(center_x, center_y, radius, angle) { 
+    if (this.drawbits) {
+        var end = (360+angle) % 360 ; 
+        this.savestate();
+        for (var c = 0; c <= end; c++ ) {
+            this.addCommand(this.turtle.arc_pointc,[center_x, center_y, radius,c])
+        }
+    } else {
+        this.addCommand(this.turtle.arcc,[center_x, center_y, radius,angle])
     }
 };
 
