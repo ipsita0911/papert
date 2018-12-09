@@ -180,6 +180,17 @@ Logo.prototype.setup = function () {
     });
 
 
+this.addCommand('rect',4,null, function (a) { 
+        console.log(a);
+        if (parseFloat(a[0]) != a[0]) return new Token('error','When using rect, you can only set the x1 to a number, not '+a[0])
+        if (parseFloat(a[1]) != a[1]) return new Token('error','When using rect, you can only set the y1 to a number, not '+a[1])
+        if (parseFloat(a[2]) != a[2]) return new Token('error','When using rect, you can only set the x2 to a number, not '+a[2])
+        if (parseFloat(a[3]) != a[3]) return new Token('error','When using rect, you can only set the y2 to a number, not '+a[3])
+  
+        this.turtle.rect(a[0], a[1], a[2], a[3]);
+    });
+
+
     this.addCommand('circle',1,null, function (a) { 
         if (parseFloat(a[0]) != a[0]) return new Token('error','When using circle, you can only set the radius to a number, not '+a[0])
 

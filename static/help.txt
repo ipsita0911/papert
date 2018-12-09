@@ -46,6 +46,11 @@ CIRCLE r        Draw a Circle of radius r around the turtle
 CIRCLEC x y r   Draw a Circle of radius r around the given co-ordinates 
 
 ARC r d         Draw an arc of radius r for d degrees
+ARC x y r d     Draw an arc of radius r for d degrees aroung the given co-ordinates
+
+LINEBET x1 y1 x2 y2    Draw a line between the given co-ordinates
+
+RECT x1 y1 x2 y2 Draw a rectangle with co-ordinates of diagonally opposite corners
 
 PENUP           Lift the pen up and down
 PU

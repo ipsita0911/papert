@@ -177,7 +177,14 @@ Turtle.prototype.arc_point = function (radius, angle) {
   }
 }
 
+Turtle.prototype.rect = function (x1, y1, x2, y2) {
+    this.savestate();
+    if (this.pen) {
+        this.c.rect(x1, y1, x2, y2);
+        this.c.stroke();
 
+    }
+}
 
 Turtle.prototype.arc_pointc = function (center_x, center_y, radius, angle) {
     if (this.pen) {
@@ -236,6 +243,7 @@ Turtle.prototype.crawl = function (d) {
     this.y = newy;
     this.update();
 }
+
 
 Turtle.prototype.backward = function (d) {
     this.forward(-d);
@@ -447,7 +455,26 @@ DelayTurtle.prototype.circlec = function(center_x, center_y, radius) {
 };
 
 DelayTurtle.prototype.linebet = function(x1, y1, x2, y2) {
-    this.addCommand(this.turtle.linebet, [x1, y1, x2, y2])
+    // if (this.drawbits) {
+    //     var d = Math.sqrt(Math.pow(x1-x2 , 2) + Math.pow(y2-y1 , 2))
+    //     var l = Math.abs(d);
+    //     var s = l/d;
+    //     var slope = Math.atan((x1-x2)/(y1-y2))
+    //     // this.x = x1;
+    //     // this.y = y1;
+    //     // console.log(x1+","+y1);
+    //     // console.log(this.x+","+this.y);
+    //     this.savestate();
+    //     for (var c = 0; c < l; c++ ) {
+    //         // this.addCommand(this.turtle.crawl2,[s, slope])
+    //     }
+    // } else {
+        this.addCommand(this.turtle.linebet, [x1, y1, x2, y2])
+    //}
+}
+
+DelayTurtle.prototype.rect = function (x1, y1, x2, y2) {
+    this.addCommand(this.turtle.rect, [x1, y1, x2, y2])
 }
 
 
